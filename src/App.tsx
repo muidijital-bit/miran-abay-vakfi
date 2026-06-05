@@ -665,7 +665,7 @@ const Lightbox = ({ state, onClose, onPrev, onNext }: {
 const galleryCategories = [
   {
     label: "Ramazan Gıda Yardımı — Abdurrahman Abay Anısına",
-    description: "Vakfımız, rahmetli Abdurrahman ABAY anısına Ramazan ayı dolayısıyla ihtiyaç sahiplerine gıda yardımında bulunmuştur. Ailelerin mahremiyetlerine olan saygımızdan ötürü dağıtım fotoğraflarına yer verilmemiştir.",
+    description: "Vakfımız, rahmetli Abdurrahman ABAY anısına Ramazan ayı dolayısıyla ihtiyaç sahiplerine gıda yardımında bulunmuştur.",
     images: [
       "/gallery/ramazan/ramazan-1.jpeg",
       "/gallery/ramazan/ramazan-2.jpeg",
