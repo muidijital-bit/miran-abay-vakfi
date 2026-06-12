@@ -72,9 +72,9 @@ const Navbar = () => {
         {/* Logo */}
         <Link to="/" className="flex-shrink-0">
           <img
-            src="/logo-header.png"
+            src={scrolled ? "/logo-transparent.png" : "/logo-header.png"}
             alt="Miran Abay Vakfı"
-            className="h-28 w-auto object-contain"
+            className={scrolled ? "h-24 w-auto object-contain" : "h-[8.75rem] w-auto object-contain"}
           />
         </Link>
 
