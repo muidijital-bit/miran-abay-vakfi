@@ -18,7 +18,7 @@ const ScrollToTop = () => {
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="bg-[#f4f2ef] min-h-screen text-[#111] font-sans selection:bg-[#c9a227] selection:text-[#060e20] relative">
+      <div className="bg-[#f4f2ef] min-h-screen text-[#111] font-sans selection:bg-[#4ab82a] selection:text-white relative">
         <ReactLenis root options={{ lerp: 0.05 }}>
           <ScrollToTop />
           <Navbar />
@@ -72,9 +72,9 @@ const Navbar = () => {
         {/* Logo */}
         <Link to="/" className="flex-shrink-0">
           <img
-            src="/logo-transparent.png"
+            src="/logo-header.png"
             alt="Miran Abay Vakfı"
-            className="h-20 w-auto object-contain"
+            className="h-28 w-auto object-contain"
           />
         </Link>
 
@@ -86,9 +86,9 @@ const Navbar = () => {
               <Link key={i} to={link.path}
                 className={`text-[12px] font-medium tracking-wide transition-all duration-200 py-1
                   ${active
-                    ? "text-[#c9a227]"
+                    ? "text-[#4ab82a]"
                     : transparent
-                    ? "text-white hover:text-[#c9a227]"
+                    ? "text-white hover:text-[#4ab82a]"
                     : "text-[#444] hover:text-[#0d1f3c]"}`}>
                 {link.name}
               </Link>
@@ -101,8 +101,8 @@ const Navbar = () => {
           <Link to="/neler-yapabilirsiniz"
             className={`text-[11px] font-bold px-5 py-2.5 rounded-lg transition-all
               ${transparent
-                ? "bg-white text-[#0d1f3c] hover:bg-[#c9a227] hover:text-white"
-                : "bg-[#0d1f3c] text-white hover:bg-[#c9a227]"}`}>
+                ? "bg-white text-[#0d1f3c] hover:bg-[#4ab82a] hover:text-white"
+                : "bg-[#0d1f3c] text-white hover:bg-[#4ab82a]"}`}>
             Bağış Yap
           </Link>
         </div>
@@ -125,13 +125,13 @@ const Navbar = () => {
             return (
               <Link key={i} to={link.path} onClick={() => setMenuOpen(false)}
                 className={`text-sm font-medium py-2.5 px-3 rounded-lg transition-colors
-                  ${active ? "bg-[#f5f4f0] text-[#c9a227]" : "text-[#333] hover:bg-[#f5f4f0] hover:text-[#0d1f3c]"}`}>
+                  ${active ? "bg-[#f5f4f0] text-[#4ab82a]" : "text-[#333] hover:bg-[#f5f4f0] hover:text-[#0d1f3c]"}`}>
                 {link.name}
               </Link>
             );
           })}
           <Link to="/neler-yapabilirsiniz" onClick={() => setMenuOpen(false)}
-            className="mt-3 bg-[#0d1f3c] text-white text-center text-sm font-bold py-3 rounded-lg hover:bg-[#c9a227] transition-colors">
+            className="mt-3 bg-[#0d1f3c] text-white text-center text-sm font-bold py-3 rounded-lg hover:bg-[#4ab82a] transition-colors">
             Bağış Yap
           </Link>
         </motion.div>
@@ -188,6 +188,44 @@ const TiltCard = ({ children, className }: { children: React.ReactNode; classNam
   );
 };
 
+/* ── LOGO BAND ── */
+const LogoBand = () => (
+  <section className="bg-white py-14 border-b border-[#f0ece5]">
+    <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10 md:gap-16">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
+        className="flex-shrink-0">
+        <img src="/logo-transparent.png" alt="Miran Abay Vakfı" className="h-32 md:h-40 w-auto object-contain" />
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+        className="flex-1">
+        <p className="text-[#4ab82a] text-xs font-bold tracking-[0.3em] uppercase mb-3">Miran Abay Eğitim ve Sağlık Vakfı</p>
+        <h2 className="text-2xl md:text-3xl font-bold text-[#0d1f3c] mb-4 leading-snug">
+          İnsanlığa Hizmet İçin Kurulduk
+        </h2>
+        <p className="text-[#666] text-[15px] leading-relaxed max-w-xl">
+          Çatışmalardan, afetlerden ve yoksulluktan etkilenen bireylere; eğitim, sağlık ve insani yardım ulaştırma misyonuyla kurulmuş bir sivil toplum kuruluşuyuz.
+        </p>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, x: 12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+        className="flex md:flex-col gap-8 md:gap-6 flex-shrink-0 md:border-l md:border-[#f0ece5] md:pl-12">
+        {[
+          { n: "5+", label: "Aktif Proje" },
+          { n: "2024", label: "Kuruluş Yılı" },
+          { n: "3", label: "Para Birimi Bağış" },
+        ].map((s, i) => (
+          <div key={i} className="text-center">
+            <div className="text-2xl md:text-3xl font-black text-[#0d1f3c]">{s.n}</div>
+            <div className="text-[10px] text-[#999] uppercase tracking-widest mt-1">{s.label}</div>
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  </section>
+);
+
 /* ── HOME ── */
 const Home = () => (
   <div className="w-full">
@@ -195,12 +233,14 @@ const Home = () => (
     <DiagDown from="#060e20" to="#0d1f3c" />
     <ActionStrip />
     <DiagUp from="#0d1f3c" to="#ffffff" />
+    <LogoBand />
     <div className="bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <ProjelerSection />
         <MisyonSection />
       </div>
     </div>
+    <GaleriTeaser />
     <HomeDestek />
   </div>
 );
@@ -221,7 +261,7 @@ const HeroZairity = () => (
     <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-6 text-center pt-24 pb-16">
       <motion.p
         initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-        className="text-[#c9a227] text-xs font-bold tracking-[0.35em] uppercase mb-6">
+        className="text-[#4ab82a] text-xs font-bold tracking-[0.35em] uppercase mb-6">
         Miran Abay Vakfı
       </motion.p>
 
@@ -241,7 +281,7 @@ const HeroZairity = () => (
         initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }}
         className="flex flex-wrap gap-4 justify-center">
         <Link to="/neler-yapabilirsiniz"
-          className="bg-[#c9a227] text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-[#b89320] transition-all shadow-xl shadow-[#c9a227]/30">
+          className="bg-[#4ab82a] text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-[#3a9c22] transition-all shadow-xl shadow-[#4ab82a]/30">
           Bağış Yapın
         </Link>
         <Link to="/neler-yapiyoruz"
@@ -272,10 +312,10 @@ const ActionStrip = () => (
             <img src={item.img} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 bg-white rounded-2xl p-4 shadow-xl">
-              {item.tag && <div className="text-[9px] font-bold text-[#c9a227] uppercase tracking-[0.25em] mb-1">{item.tag}</div>}
+              {item.tag && <div className="text-[9px] font-bold text-[#4ab82a] uppercase tracking-[0.25em] mb-1">{item.tag}</div>}
               <div className="font-bold text-[#0d1f3c] mb-1 text-sm">{item.title}</div>
               <p className="text-xs text-[#777] leading-relaxed mb-2">{item.sub}</p>
-              <Link to="/neler-yapabilirsiniz" className="text-xs font-bold text-[#0d1f3c] hover:text-[#c9a227] transition-colors">
+              <Link to="/neler-yapabilirsiniz" className="text-xs font-bold text-[#0d1f3c] hover:text-[#4ab82a] transition-colors">
                 Hemen Başla →
               </Link>
             </div>
@@ -289,48 +329,48 @@ const ActionStrip = () => (
 /* ── PROJELER ── */
 const ProjelerSection = () => (
   <section className="py-20">
-    <div className="flex items-end justify-between mb-12">
-      <div>
-        <p className="text-[#c9a227] text-xs font-bold tracking-[0.3em] uppercase mb-3">Projelerimiz</p>
-        <h2 className="text-3xl md:text-4xl font-bold text-[#0d1f3c]">Neler Yapıyoruz?</h2>
+    <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+
+      {/* Sol: başlık + CTA */}
+      <div className="lg:col-span-2 lg:sticky lg:top-28">
+        <p className="text-[#4ab82a] text-xs font-bold tracking-[0.3em] uppercase mb-4">Projelerimiz</p>
+        <h2 className="text-3xl md:text-4xl font-bold text-[#0d1f3c] leading-snug mb-6">
+          Neler<br />Yapıyoruz?
+        </h2>
+        <p className="text-[#777] text-sm leading-relaxed mb-8">
+          İhtiyaç sahibi bireylere ulaşmak için farklı alanlarda 5 aktif proje yürütüyoruz.
+        </p>
+        <Link to="/neler-yapiyoruz"
+          className="inline-flex items-center gap-2 bg-[#0d1f3c] text-white px-7 py-3.5 rounded-full text-sm font-bold hover:bg-[#4ab82a] transition-colors duration-300">
+          Tüm Projeleri Gör <FiChevronRight size={15} />
+        </Link>
       </div>
-      <Link to="/neler-yapiyoruz" className="hidden md:flex items-center gap-1 text-sm font-bold text-[#0d1f3c] hover:text-[#c9a227] transition-colors">
-        Tümünü Gör <FiChevronRight />
-      </Link>
+
+      {/* Sağ: numaralı liste */}
+      <div className="lg:col-span-3 divide-y divide-[#ede9e3]">
+        {projects.map((p, i) => (
+          <Link key={i} to="/neler-yapiyoruz">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
+              className="group flex items-center gap-5 py-6 hover:pl-3 transition-all duration-300 cursor-pointer">
+              <span className="text-[11px] font-black text-[#ddd] tracking-widest w-7 flex-shrink-0 group-hover:text-[#4ab82a] transition-colors">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-[15px] font-bold text-[#0d1f3c] group-hover:text-[#4ab82a] transition-colors leading-snug mb-1">
+                  {p.title}
+                </h3>
+                <p className="text-[#aaa] text-xs leading-relaxed truncate">{p.content.substring(0, 75)}…</p>
+              </div>
+              <div className="w-8 h-8 rounded-full border border-[#e8e4dd] group-hover:border-[#4ab82a] group-hover:bg-[#4ab82a] flex items-center justify-center transition-all duration-300 flex-shrink-0">
+                <FiChevronRight className="text-[#bbb] group-hover:text-white transition-colors" size={14} />
+              </div>
+            </motion.div>
+          </Link>
+        ))}
+      </div>
+
     </div>
-
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-      className="relative h-[380px] rounded-[28px] overflow-hidden mb-4 group cursor-pointer">
-      <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=1600&auto=format&fit=crop"
-        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#060e20]/85 via-[#060e20]/40 to-transparent" />
-      <div className="absolute bottom-0 left-0 p-10 max-w-xl">
-        <div className="text-[#c9a227] text-[9px] font-bold tracking-[0.3em] uppercase mb-3">Öne Çıkan Proje</div>
-        <h3 className="text-3xl font-bold text-white mb-3">Yaşlılar Merkezi Projesi</h3>
-        <p className="text-white/60 text-sm leading-relaxed">İhtiyaç sahibi yaşlılarımız için bedelsiz hizmet, bakım ve sosyal destek merkezi.</p>
-      </div>
-    </motion.div>
-
-    <motion.div
-      initial="initial" whileInView="animate" viewport={{ once: true }} transition={{ staggerChildren: 0.08 }}
-      className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {[
-        { title: "Yardım Hattı Projesi", desc: "Uzman kadromuzla bedelsiz danışmanlık hizmeti.", img: "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=600&auto=format&fit=crop" },
-        { title: "Mobil Sağlık Projesi", desc: "Zor bölgelere sağlık hizmeti götürüyoruz.", img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=600&auto=format&fit=crop" },
-        { title: "Eğitim Desteği Projesi", desc: "Burs ve staj imkânlarıyla gençlere destek.", img: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?q=80&w=600&auto=format&fit=crop" },
-      ].map((p, i) => (
-        <motion.div key={i} variants={{ initial: { y: 16, opacity: 0 }, animate: { y: 0, opacity: 1 } }}>
-          <TiltCard className="relative h-52 rounded-[20px] overflow-hidden group cursor-pointer block">
-            <img src={p.img} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={p.title} />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#060e20]/80 via-[#060e20]/10 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-5">
-              <h3 className="text-sm font-bold text-white mb-1">{p.title}</h3>
-              <p className="text-white/55 text-xs leading-relaxed">{p.desc}</p>
-            </div>
-          </TiltCard>
-        </motion.div>
-      ))}
-    </motion.div>
   </section>
 );
 
@@ -341,7 +381,7 @@ const MisyonSection = () => (
       initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
       className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center mb-8">
       <div>
-        <p className="text-[#c9a227] text-xs font-bold tracking-[0.3em] uppercase mb-4">Hakkımızda</p>
+        <p className="text-[#4ab82a] text-xs font-bold tracking-[0.3em] uppercase mb-4">Hakkımızda</p>
         <h2 className="text-3xl md:text-4xl font-bold text-[#0d1f3c] mb-6 leading-snug">
           Misyonumuz İnsanlığa<br />Hizmet Etmektir
         </h2>
@@ -351,12 +391,12 @@ const MisyonSection = () => (
         <ul className="space-y-3 mb-8">
           {["İhtiyaç sahiplerine zamanında ulaşmak", "Eğitim ve sağlık desteği sunmak", "Toplumsal dayanışmayı güçlendirmek"].map((item, i) => (
             <li key={i} className="flex items-center gap-3 text-sm text-[#555]">
-              <span className="w-5 h-5 rounded-full bg-[#c9a227]/10 flex items-center justify-center text-[#c9a227] flex-shrink-0 text-xs font-bold">✓</span>
+              <span className="w-5 h-5 rounded-full bg-[#4ab82a]/10 flex items-center justify-center text-[#4ab82a] flex-shrink-0 text-xs font-bold">✓</span>
               {item}
             </li>
           ))}
         </ul>
-        <Link to="/biz-kimiz" className="inline-flex items-center gap-1 text-sm font-bold text-[#0d1f3c] border-b border-[#0d1f3c] pb-0.5 hover:text-[#c9a227] hover:border-[#c9a227] transition-colors">
+        <Link to="/biz-kimiz" className="inline-flex items-center gap-1 text-sm font-bold text-[#0d1f3c] border-b border-[#0d1f3c] pb-0.5 hover:text-[#4ab82a] hover:border-[#4ab82a] transition-colors">
           Daha Fazla Öğren →
         </Link>
       </div>
@@ -371,23 +411,78 @@ const MisyonSection = () => (
     </motion.div>
 
     <div className="bg-[#060e20] rounded-[24px] px-8 md:px-14 py-10 flex flex-col md:flex-row items-center gap-5">
-      <div className="text-5xl text-[#c9a227] font-serif leading-none select-none flex-shrink-0">"</div>
+      <div className="text-5xl text-[#4ab82a] font-serif leading-none select-none flex-shrink-0">"</div>
       <p className="text-white/75 text-lg md:text-xl font-medium leading-relaxed text-center md:text-left">
         Hiç kimsenin yalnız kalmadığı, her insanın onurlu bir yaşam sürebildiği bir dünya.
       </p>
-      <div className="text-5xl text-[#c9a227] font-serif leading-none select-none flex-shrink-0 self-end rotate-180">"</div>
+      <div className="text-5xl text-[#4ab82a] font-serif leading-none select-none flex-shrink-0 self-end rotate-180">"</div>
     </div>
   </section>
 );
 
-/* ── İSTATİSTİK ── */
+/* ── GALERİ TEASER ── */
+const GaleriTeaser = () => (
+  <section className="bg-[#f5f4f0] py-20">
+    <div className="max-w-7xl mx-auto px-6">
+      <div className="flex items-end justify-between mb-10">
+        <div>
+          <p className="text-[#4ab82a] text-xs font-bold tracking-[0.3em] uppercase mb-3">Son Çalışmalarımız</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#0d1f3c] leading-snug">
+            Sahada Neler Yaptık?
+          </h2>
+        </div>
+        <Link to="/neler-yaptik"
+          className="hidden md:inline-flex items-center gap-2 text-sm font-bold text-[#0d1f3c] border-b border-[#0d1f3c] pb-0.5 hover:text-[#4ab82a] hover:border-[#4ab82a] transition-colors">
+          Tümünü Gör <FiChevronRight size={14} />
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+        {[
+          "/gallery/ramazan/ramazan-1.jpeg",
+          "/gallery/ramazan/ramazan-2.jpeg",
+          "/gallery/ramazan/ramazan-3.jpeg",
+          "/gallery/ramazan/ramazan-4.jpeg",
+          "/gallery/ramazan/ramazan-5.jpeg",
+          "/gallery/ramazan/ramazan-6.jpeg",
+        ].map((src, i) => (
+          <Link to="/neler-yaptik" key={i} className="group block">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }} transition={{ delay: i * 0.07 }}
+              className="relative aspect-square overflow-hidden rounded-[14px]">
+              <img
+                src={src} alt=""
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="bg-white/90 text-[#0d1f3c] text-xs font-bold px-4 py-2 rounded-full shadow-lg">
+                  Galeriyi Gör
+                </span>
+              </div>
+            </motion.div>
+          </Link>
+        ))}
+      </div>
+
+      <div className="mt-8 text-center md:hidden">
+        <Link to="/neler-yaptik"
+          className="inline-flex items-center gap-2 bg-[#0d1f3c] text-white px-7 py-3.5 rounded-full text-sm font-bold">
+          Tümünü Gör <FiChevronRight size={15} />
+        </Link>
+      </div>
+    </div>
+  </section>
+);
+
 /* ── HOME DESTEK CTA ── */
 const HomeDestek = () => (
   <section className="relative overflow-hidden" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=2000&auto=format&fit=crop)", backgroundSize: "cover", backgroundPosition: "center" }}>
     <div className="absolute inset-0 bg-[#060e20]/80" />
     <div className="relative z-10 max-w-3xl mx-auto px-6 py-24 text-center">
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-        <p className="text-[#c9a227] text-xs font-bold tracking-[0.3em] uppercase mb-5">Siz De Katılın</p>
+        <p className="text-[#4ab82a] text-xs font-bold tracking-[0.3em] uppercase mb-5">Siz De Katılın</p>
         <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-snug">
           Değişimin Parçası<br />Olun
         </h2>
@@ -396,7 +491,7 @@ const HomeDestek = () => (
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
           <Link to="/neler-yapabilirsiniz"
-            className="bg-[#c9a227] text-white px-10 py-4 rounded-full font-bold hover:bg-[#b89320] transition-colors shadow-lg shadow-[#c9a227]/30">
+            className="bg-[#4ab82a] text-white px-10 py-4 rounded-full font-bold hover:bg-[#3a9c22] transition-colors shadow-lg shadow-[#4ab82a]/30">
             Bağış Yap
           </Link>
           <Link to="/neler-yapabilirsiniz"
@@ -411,7 +506,7 @@ const HomeDestek = () => (
 
 /* ── INNER HERO ── */
 const InnerHero = ({ title, subtitle, img }: { title: string; subtitle: string; img: string }) => (
-  <div className="bg-[#f5f4f0] pt-24 pb-10 border-b border-[#e2ddd6] relative overflow-hidden">
+  <div className="bg-[#f5f4f0] pt-28 pb-8 border-b border-[#e2ddd6] relative overflow-hidden">
     {/* Sağ taraf fotoğraf dekorasyonu */}
     <div className="absolute right-0 top-0 w-2/5 h-full hidden md:block pointer-events-none">
       <img src={img} className="w-full h-full object-cover opacity-30" alt="" />
@@ -419,7 +514,7 @@ const InnerHero = ({ title, subtitle, img }: { title: string; subtitle: string; 
     </div>
     <div className="max-w-7xl mx-auto px-6 relative z-10">
       <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }}
-        className="text-[#c9a227] text-[10px] font-bold tracking-[0.3em] uppercase mb-3">{subtitle}</motion.p>
+        className="text-[#4ab82a] text-[10px] font-bold tracking-[0.3em] uppercase mb-3">{subtitle}</motion.p>
       <motion.h1 initial={{ y: 16, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }}
         className="text-4xl md:text-6xl font-black text-[#0d1f3c] leading-tight">{title}</motion.h1>
     </div>
@@ -475,7 +570,7 @@ const NelerYapiyoruz = () => (
         <img src={projects[0].img} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt={projects[0].title} />
         <div className="absolute inset-0 bg-gradient-to-r from-[#060e20]/85 via-[#060e20]/50 to-transparent" />
         <div className="absolute inset-0 flex flex-col justify-end p-10 md:p-14 max-w-2xl">
-          <span className="text-[#c9a227] text-[10px] font-bold tracking-[0.3em] uppercase mb-3">Öne Çıkan Proje</span>
+          <span className="text-[#4ab82a] text-[10px] font-bold tracking-[0.3em] uppercase mb-3">Öne Çıkan Proje</span>
           <h2 className="text-3xl md:text-4xl font-black text-white mb-4 leading-snug">{projects[0].title}</h2>
           <p className="text-white/65 text-sm leading-relaxed">{projects[0].content}</p>
         </div>
@@ -495,10 +590,10 @@ const NelerYapiyoruz = () => (
             </div>
             {/* İçerik */}
             <div className="p-7 flex flex-col flex-1">
-              <div className="w-6 h-0.5 bg-[#c9a227] rounded-full mb-4" />
+              <div className="w-6 h-0.5 bg-[#4ab82a] rounded-full mb-4" />
               <h3 className="text-lg font-bold text-[#0d1f3c] mb-3 leading-snug">{p.title}</h3>
               <p className="text-[#777] text-sm leading-relaxed flex-1">{p.content}</p>
-              <div className="mt-5 flex items-center gap-1.5 text-xs font-bold text-[#0d1f3c] group-hover:text-[#c9a227] transition-colors">
+              <div className="mt-5 flex items-center gap-1.5 text-xs font-bold text-[#0d1f3c] group-hover:text-[#4ab82a] transition-colors">
                 Daha Fazla <FiChevronRight size={13} />
               </div>
             </div>
@@ -514,7 +609,7 @@ const NelerYapiyoruz = () => (
           <p className="text-white/50 text-sm">Bağış yaparak veya gönüllü olarak fark yaratabilirsiniz.</p>
         </div>
         <div className="flex gap-3 flex-shrink-0">
-          <Link to="/neler-yapabilirsiniz" className="bg-[#c9a227] text-white px-7 py-3 rounded-full text-sm font-bold hover:bg-[#b89320] transition-colors whitespace-nowrap">
+          <Link to="/neler-yapabilirsiniz" className="bg-[#4ab82a] text-white px-7 py-3 rounded-full text-sm font-bold hover:bg-[#3a9c22] transition-colors whitespace-nowrap">
             Bağış Yap
           </Link>
           <Link to="/neler-yapabilirsiniz" className="border border-white/20 text-white px-7 py-3 rounded-full text-sm font-bold hover:bg-white/10 transition-colors whitespace-nowrap">
@@ -543,10 +638,10 @@ const BizKimiz = () => (
     <div className="max-w-5xl mx-auto px-6 mt-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20 items-center">
         <div>
-          <p className="text-[#c9a227] text-xs font-bold tracking-[0.3em] uppercase mb-4">Misyon & Vizyon</p>
+          <p className="text-[#4ab82a] text-xs font-bold tracking-[0.3em] uppercase mb-4">Misyon & Vizyon</p>
           <h2 className="text-3xl md:text-4xl font-bold text-[#0d1f3c] mb-6 leading-snug">
             Gerekli İnsani Yardımı<br />
-            <span className="text-[#c9a227]">Dünyaya Ulaştırıyoruz</span>
+            <span className="text-[#4ab82a]">Dünyaya Ulaştırıyoruz</span>
           </h2>
           <p className="text-[#555] leading-relaxed mb-5 text-[15px]">
             Miran Abay Vakfı; çatışmalardan, doğal afetlerden, yoksulluktan veya hastalıktan etkilenen insanlara insani yardım ulaştırma misyonuyla kurulmuştur.
@@ -563,15 +658,15 @@ const BizKimiz = () => (
       </div>
 
       <div className="mb-16">
-        <p className="text-[#c9a227] text-xs font-bold tracking-[0.3em] uppercase mb-3 text-center">Temel Değerlerimiz</p>
+        <p className="text-[#4ab82a] text-xs font-bold tracking-[0.3em] uppercase mb-3 text-center">Temel Değerlerimiz</p>
         <h3 className="text-2xl font-bold text-[#0d1f3c] mb-10 text-center">Altı İlkemiz</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {values.map((v, i) => (
             <motion.div key={i}
               initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
               className="bg-[#f5f4f0] border border-[#e2ddd6] rounded-2xl p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-              <div className="w-7 h-7 rounded-full bg-[#c9a227]/10 flex items-center justify-center mb-4">
-                <FiHeart className="text-[#c9a227] text-xs" />
+              <div className="w-7 h-7 rounded-full bg-[#4ab82a]/10 flex items-center justify-center mb-4">
+                <FiHeart className="text-[#4ab82a] text-xs" />
               </div>
               <h4 className="font-bold text-[#0d1f3c] mb-2">{v.title}</h4>
               <p className="text-[#666] text-sm leading-relaxed">{v.desc}</p>
@@ -665,7 +760,7 @@ const Lightbox = ({ state, onClose, onPrev, onNext }: {
 const galleryCategories = [
   {
     label: "Ramazan Gıda Yardımı — Abdurrahman Abay Anısına",
-    description: "Vakfımız, rahmetli Abdurrahman ABAY anısına Ramazan ayı dolayısıyla ihtiyaç sahiplerine gıda yardımında bulunmuştur.",
+    description: "Vakfımız, rahmetli Abdurrahman ABAY anısına Ramazan ayı dolayısıyla ihtiyaç sahiplerine gıda yardımında bulunmuştur. Mahremiyete verilen önem dolayısıyla dağıtım fotoğraflarına yer verilmemiştir.",
     images: [
       "/gallery/ramazan/ramazan-1.jpeg",
       "/gallery/ramazan/ramazan-2.jpeg",
@@ -732,7 +827,7 @@ const NelerYaptik = () => {
         {galleryCategories.map((cat, ci) => (
           <div key={ci} className="mb-16">
             <div className="flex items-start gap-3 mb-4">
-              <div className="w-2 h-8 bg-[#c9a227] rounded-full flex-shrink-0 mt-1" />
+              <div className="w-2 h-8 bg-[#4ab82a] rounded-full flex-shrink-0 mt-1" />
               <div>
                 <h3 className="text-xl font-bold text-[#0d1f3c]">{cat.label}</h3>
                 {cat.description && (
@@ -760,7 +855,7 @@ const NelerYaptik = () => {
           <h3 className="text-2xl font-bold text-[#0d1f3c] mb-4">Siz De Katkıda Bulunun</h3>
           <p className="text-[#666] mb-8 max-w-md mx-auto">Bu başarıları birlikte kazandık. Daha fazlası için sizin desteğinize ihtiyacımız var.</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/neler-yapabilirsiniz" className="bg-[#c9a227] text-white px-8 py-3 rounded-full text-sm font-bold hover:bg-[#b89320] transition-colors">Bağış Yapın</Link>
+            <Link to="/neler-yapabilirsiniz" className="bg-[#4ab82a] text-white px-8 py-3 rounded-full text-sm font-bold hover:bg-[#3a9c22] transition-colors">Bağış Yapın</Link>
             <Link to="/neler-yapabilirsiniz" className="border-2 border-[#0d1f3c] text-[#0d1f3c] px-8 py-3 rounded-full text-sm font-bold hover:bg-[#0d1f3c] hover:text-white transition-colors">Gönüllü Olun</Link>
           </div>
         </div>
@@ -789,27 +884,27 @@ const NelerYapabilirsiniz = () => (
   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white pb-32">
     <InnerHero title="Nasıl Destek Olursunuz" subtitle="Katılım Yolları" img="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=2670&auto=format&fit=crop" />
 
-    <div className="max-w-5xl mx-auto px-6 mt-16">
+    <div className="max-w-5xl mx-auto px-6 mt-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
 
         {/* Bağış */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="bg-[#0d1f3c] text-white rounded-[28px] p-8 md:p-10 flex flex-col">
           <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-6">
-            <FiHeart className="text-[#c9a227] text-xl" />
+            <FiHeart className="text-[#4ab82a] text-xl" />
           </div>
           <h3 className="text-2xl font-bold mb-2">Bağış Yapabilirsiniz</h3>
           <p className="text-white/60 text-sm mb-6 leading-relaxed">Vakfımızın ailesine katılarak yaşamaları etkileyebilirsiniz. Her bağış, bir hayata dokunur.</p>
           <ul className="space-y-3 mb-8 flex-1">
             {donationItems.map((item, i) => (
               <li key={i} className="flex items-start gap-3 text-sm text-white/80">
-                <span className="text-[#c9a227] mt-0.5 flex-shrink-0">✓</span>
+                <span className="text-[#4ab82a] mt-0.5 flex-shrink-0">✓</span>
                 {item}
               </li>
             ))}
           </ul>
           <a href="mailto:info@miranabayvakfi.com"
-            className="mt-auto bg-[#c9a227] text-white text-center py-3 rounded-full text-sm font-bold hover:bg-[#b89320] transition-colors">
+            className="mt-auto bg-[#4ab82a] text-white text-center py-3 rounded-full text-sm font-bold hover:bg-[#3a9c22] transition-colors">
             Bağış İçin İletişime Geçin
           </a>
         </motion.div>
@@ -817,8 +912,8 @@ const NelerYapabilirsiniz = () => (
         {/* Gönüllü */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
           className="bg-[#f5f4f0] border border-[#e2ddd6] rounded-[28px] p-8 md:p-10 flex flex-col">
-          <div className="w-12 h-12 rounded-full bg-[#c9a227]/10 flex items-center justify-center mb-6">
-            <FiUsers className="text-[#c9a227] text-xl" />
+          <div className="w-12 h-12 rounded-full bg-[#4ab82a]/10 flex items-center justify-center mb-6">
+            <FiUsers className="text-[#4ab82a] text-xl" />
           </div>
           <h3 className="text-2xl font-bold text-[#0d1f3c] mb-2">Gönüllü Olabilirsiniz</h3>
           <p className="text-[#666] text-sm mb-6 leading-relaxed">Fark yaratın. Becerilerinizi toplum için kullanın, kültürel çeşitliliği deneyimleyin ve kişisel gelişiminize katkı sağlayın.</p>
@@ -837,17 +932,54 @@ const NelerYapabilirsiniz = () => (
         </motion.div>
       </div>
 
+      {/* Banka Hesapları */}
+      <div className="bg-white border border-[#e2ddd6] rounded-[28px] overflow-hidden mb-8">
+        {/* Başlık */}
+        <div className="px-8 pt-8 pb-6 border-b border-[#e2ddd6]">
+          <div className="flex items-center gap-4 mb-2">
+            <div className="w-10 h-10 rounded-xl bg-[#4ab82a]/10 flex items-center justify-center flex-shrink-0">
+              <FiHeart className="text-[#4ab82a] text-lg" />
+            </div>
+            <div>
+              <p className="text-[#4ab82a] text-[10px] font-bold tracking-[0.3em] uppercase">Banka Hesaplarımız</p>
+              <h3 className="text-xl font-bold text-[#0d1f3c]">Vakıf Katılım Bankası A.Ş.</h3>
+            </div>
+          </div>
+          <p className="text-[#999] text-sm mt-3">
+            Hesap Sahibi: <span className="text-[#444] font-semibold">Miran Abay Eğitim ve Sağlık Vakfı</span>
+          </p>
+        </div>
+        {/* IBAN listesi */}
+        <div className="divide-y divide-[#f0ece5]">
+          {[
+            { currency: "Türk Lirası", code: "TL", iban: "TR19 0021 0000 0014 1747 6000 01" },
+            { currency: "Amerikan Doları", code: "USD", iban: "TR35 0021 0000 0014 1747 6001 01" },
+            { currency: "Euro", code: "EUR", iban: "TR08 0021 0000 0014 1747 6001 02" },
+          ].map((acc, i) => (
+            <div key={i} className="flex items-center gap-5 px-8 py-5">
+              <div className="w-12 h-12 rounded-2xl bg-[#f5f4f0] border border-[#e2ddd6] flex items-center justify-center flex-shrink-0">
+                <span className="text-[11px] font-black text-[#4ab82a] tracking-wide">{acc.code}</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[#aaa] text-[10px] font-bold uppercase tracking-widest mb-1">{acc.currency}</div>
+                <div className="font-mono text-base font-bold text-[#0d1f3c] tracking-wider">{acc.iban}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="bg-[#f5f4f0] border border-[#e2ddd6] rounded-[24px] p-8 text-center">
-        <p className="text-[#c9a227] text-xs font-bold tracking-[0.3em] uppercase mb-3">İletişim</p>
+        <p className="text-[#4ab82a] text-xs font-bold tracking-[0.3em] uppercase mb-3">İletişim</p>
         <h3 className="text-2xl font-bold text-[#0d1f3c] mb-2">Daha Fazla Bilgi İçin</h3>
         <p className="text-[#666] mb-6 text-sm">Bağış veya gönüllülük hakkında daha fazla bilgi almak için bize ulaşın.</p>
         <div className="flex flex-wrap gap-4 justify-center text-sm font-medium">
-          <a href="mailto:info@miranabayvakfi.com" className="flex items-center gap-2 text-[#0d1f3c] hover:text-[#c9a227] transition-colors">
+          <a href="mailto:info@miranabayvakfi.com" className="flex items-center gap-2 text-[#0d1f3c] hover:text-[#4ab82a] transition-colors">
             <FiMail /> info@miranabayvakfi.com
           </a>
-          <span className="flex items-center gap-2 text-[#0d1f3c]">
-            <FiPhone /> Yakında Eklenecek
-          </span>
+          <a href="tel:+905077500704" className="flex items-center gap-2 text-[#0d1f3c] hover:text-[#4ab82a] transition-colors">
+            <FiPhone /> 0507 750 07 04
+          </a>
         </div>
       </div>
     </div>
@@ -870,21 +1002,21 @@ const BizeUlasin = () => (
 
         {/* İletişim Bilgileri */}
         <div className="flex flex-col justify-center">
-          <p className="text-[#c9a227] text-xs font-bold tracking-[0.3em] uppercase mb-4">Adresimiz</p>
+          <p className="text-[#4ab82a] text-xs font-bold tracking-[0.3em] uppercase mb-4">Adresimiz</p>
           <h3 className="text-3xl font-bold text-[#0d1f3c] mb-6">Bize Ulaşın</h3>
           <p className="text-[#666] mb-10 leading-relaxed">Bağış, gönüllülük veya projelerimiz hakkında bilgi almak için aşağıdaki kanallardan bize ulaşabilirsiniz.</p>
           <div className="space-y-5">
             {[
-              { icon: <FiMapPin />, label: "Adres", value: "Yakında Eklenecek" },
-              { icon: <FiPhone />, label: "Telefon", value: "Yakında Eklenecek" },
+              { icon: <FiMapPin />, label: "Adres", value: "Çamlıca Mah. Anadolu Bulvarı Regnum İş Merkezi 16 B / 2 06200 Yenimahalle / Ankara" },
+              { icon: <FiPhone />, label: "Telefon", value: "0507 750 07 04", href: "tel:+905077500704" },
               { icon: <FiMail />, label: "E-Posta", value: "info@miranabayvakfi.com", href: "mailto:info@miranabayvakfi.com" },
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-[#f5f4f0] border border-[#e2ddd6] flex items-center justify-center text-[#c9a227] flex-shrink-0">{item.icon}</div>
+                <div className="w-10 h-10 rounded-xl bg-[#f5f4f0] border border-[#e2ddd6] flex items-center justify-center text-[#4ab82a] flex-shrink-0">{item.icon}</div>
                 <div>
-                  <div className="text-[10px] font-bold tracking-widest uppercase text-[#c9a227] mb-0.5">{item.label}</div>
+                  <div className="text-[10px] font-bold tracking-widest uppercase text-[#4ab82a] mb-0.5">{item.label}</div>
                   {item.href
-                    ? <a href={item.href} className="text-[#0d1f3c] font-medium hover:text-[#c9a227] transition-colors">{item.value}</a>
+                    ? <a href={item.href} className="text-[#0d1f3c] font-medium hover:text-[#4ab82a] transition-colors">{item.value}</a>
                     : <span className="text-[#0d1f3c] font-medium">{item.value}</span>}
                 </div>
               </div>
@@ -895,34 +1027,34 @@ const BizeUlasin = () => (
 
       {/* Form */}
       <div className="bg-[#f5f4f0] border border-[#e2ddd6] rounded-[28px] p-8 md:p-12">
-        <p className="text-[#c9a227] text-xs font-bold tracking-[0.3em] uppercase mb-3">Mesaj Gönderin</p>
+        <p className="text-[#4ab82a] text-xs font-bold tracking-[0.3em] uppercase mb-3">Mesaj Gönderin</p>
         <h3 className="text-2xl font-bold text-[#0d1f3c] mb-2">Bizimle İletişime Geçin</h3>
         <p className="text-[#666] text-sm mb-8">Sorularınız, bağış teklifleriniz veya gönüllülük başvurularınız için formu doldurun.</p>
         <form className="space-y-5">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-[#0d1f3c] block mb-1.5">Ad Soyad</label>
-              <input type="text" className="w-full bg-white border border-[#e2ddd6] rounded-xl px-4 py-3.5 focus:outline-none focus:border-[#c9a227] transition-colors text-sm" placeholder="Adınız Soyadınız" />
+              <input type="text" className="w-full bg-white border border-[#e2ddd6] rounded-xl px-4 py-3.5 focus:outline-none focus:border-[#4ab82a] transition-colors text-sm" placeholder="Adınız Soyadınız" />
             </div>
             <div>
               <label className="text-xs font-bold uppercase tracking-widest text-[#0d1f3c] block mb-1.5">E-Posta</label>
-              <input type="email" className="w-full bg-white border border-[#e2ddd6] rounded-xl px-4 py-3.5 focus:outline-none focus:border-[#c9a227] transition-colors text-sm" placeholder="ornek@email.com" />
+              <input type="email" className="w-full bg-white border border-[#e2ddd6] rounded-xl px-4 py-3.5 focus:outline-none focus:border-[#4ab82a] transition-colors text-sm" placeholder="ornek@email.com" />
             </div>
           </div>
           <div>
             <label className="text-xs font-bold uppercase tracking-widest text-[#0d1f3c] block mb-1.5">Telefon</label>
-            <input type="tel" className="w-full bg-white border border-[#e2ddd6] rounded-xl px-4 py-3.5 focus:outline-none focus:border-[#c9a227] transition-colors text-sm" placeholder="+90 5XX XXX XX XX" />
+            <input type="tel" className="w-full bg-white border border-[#e2ddd6] rounded-xl px-4 py-3.5 focus:outline-none focus:border-[#4ab82a] transition-colors text-sm" placeholder="+90 5XX XXX XX XX" />
           </div>
           <div>
             <label className="text-xs font-bold uppercase tracking-widest text-[#0d1f3c] block mb-1.5">Mesajınız</label>
-            <textarea rows={4} className="w-full bg-white border border-[#e2ddd6] rounded-xl px-4 py-3.5 focus:outline-none focus:border-[#c9a227] transition-colors resize-none text-sm" placeholder="Mesajınızı buraya yazın..." />
+            <textarea rows={4} className="w-full bg-white border border-[#e2ddd6] rounded-xl px-4 py-3.5 focus:outline-none focus:border-[#4ab82a] transition-colors resize-none text-sm" placeholder="Mesajınızı buraya yazın..." />
           </div>
           <div className="flex items-start gap-2 text-xs text-[#666]">
-            <input type="checkbox" className="mt-0.5 accent-[#c9a227]" />
+            <input type="checkbox" className="mt-0.5 accent-[#4ab82a]" />
             <span>Kişisel verilerimin işlenmesini ve vakıf ile iletişim kurulmasını kabul ediyorum.</span>
           </div>
           <button type="button"
-            className="bg-[#0d1f3c] text-white px-10 py-4 rounded-xl font-bold tracking-wider text-xs uppercase hover:bg-[#c9a227] transition-colors flex items-center gap-2">
+            className="bg-[#0d1f3c] text-white px-10 py-4 rounded-xl font-bold tracking-wider text-xs uppercase hover:bg-[#4ab82a] transition-colors flex items-center gap-2">
             Gönder <FiSend />
           </button>
         </form>
@@ -950,7 +1082,7 @@ const Footer = () => (
       </div>
 
       <div className="md:col-span-3">
-        <h5 className="font-bold tracking-widest uppercase text-xs text-[#c9a227] mb-5">Sayfalar</h5>
+        <h5 className="font-bold tracking-widest uppercase text-xs text-[#4ab82a] mb-5">Sayfalar</h5>
         <ul className="space-y-3 text-sm text-white/60">
           {[
             { name: "Ana Sayfa", path: "/" },
@@ -966,11 +1098,11 @@ const Footer = () => (
       </div>
 
       <div className="md:col-span-4">
-        <h5 className="font-bold tracking-widest uppercase text-xs text-[#c9a227] mb-5">İletişim</h5>
+        <h5 className="font-bold tracking-widest uppercase text-xs text-[#4ab82a] mb-5">İletişim</h5>
         <ul className="space-y-4 text-sm text-white/60">
-          <li className="flex items-start gap-3"><FiMapPin className="flex-shrink-0 mt-0.5 text-[#c9a227]" /><span>Yakında Eklenecek</span></li>
-          <li className="flex items-center gap-3"><FiPhone className="text-[#c9a227]" /><span>Yakında Eklenecek</span></li>
-          <li className="flex items-center gap-3"><FiMail className="text-[#c9a227]" /><a href="mailto:info@miranabayvakfi.com" className="hover:text-white transition-colors">info@miranabayvakfi.com</a></li>
+          <li className="flex items-start gap-3"><FiMapPin className="flex-shrink-0 mt-0.5 text-[#4ab82a]" /><span>Çamlıca Mah. Anadolu Bulvarı Regnum İş Merkezi 16 B / 2, Yenimahalle / Ankara</span></li>
+          <li className="flex items-center gap-3"><FiPhone className="text-[#4ab82a]" /><a href="tel:+905077500704" className="hover:text-white transition-colors">0507 750 07 04</a></li>
+          <li className="flex items-center gap-3"><FiMail className="text-[#4ab82a]" /><a href="mailto:info@miranabayvakfi.com" className="hover:text-white transition-colors">info@miranabayvakfi.com</a></li>
         </ul>
       </div>
     </div>
@@ -978,9 +1110,9 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto px-6 border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
       <p className="text-white/30 text-xs tracking-wider">© {new Date().getFullYear()} Miran Abay Vakfı. Tüm hakları saklıdır.</p>
       <div className="flex gap-5 text-white/40">
-        <a href="#" className="hover:text-[#c9a227] transition-colors"><FaInstagram size={18} /></a>
-        <a href="#" className="hover:text-[#c9a227] transition-colors"><FaLinkedin size={18} /></a>
-        <a href="#" className="hover:text-[#c9a227] transition-colors"><FaWhatsapp size={18} /></a>
+        <a href="#" className="hover:text-[#4ab82a] transition-colors"><FaInstagram size={18} /></a>
+        <a href="#" className="hover:text-[#4ab82a] transition-colors"><FaLinkedin size={18} /></a>
+        <a href="#" className="hover:text-[#4ab82a] transition-colors"><FaWhatsapp size={18} /></a>
       </div>
     </div>
   </footer>

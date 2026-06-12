@@ -137,7 +137,7 @@ export default function SpiralHero() {
             }}
           >
             <span style={{ display: "block" }}>Her El</span>
-            <span style={{ display: "block", fontStyle: "italic", color: "#c9a227" }}>
+            <span style={{ display: "block", fontStyle: "italic", color: "#4ab82a" }}>
               Bir Umut,
             </span>
             <span style={{ display: "block" }}>Her Adım Değişim.</span>
